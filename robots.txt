@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anabeatrizschmitz.com.br/sitemap.xml
