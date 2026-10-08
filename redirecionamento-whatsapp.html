@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#8c4d2e">
+<title>Redirecionando para o WhatsApp | Ana Beatriz Schmitz – Psicóloga</title>
+<meta name="description" content="Você será encaminhado ao WhatsApp da psicóloga Ana Beatriz Schmitz (CRP 12/30593) em instantes.">
+
+<style>
+  :root {
+    --bg-1: #fbf4ee;
+    --bg-2: #f1e0d1;
+    --ink: #8c4d2e;
+    --ink-soft: #7a5a48;
+    --brand: #8c4d2e;
+    --brand-dark: #6e3b22;
+    --card: rgba(255, 252, 248, 0.82);
+    --card-border: rgba(140, 77, 46, 0.14);
+    --wa: #25d366;
+    --wa-dark: #1ebe5b;
+    --wave-1: rgba(140, 77, 46, 0.16);
+    --wave-2: rgba(140, 77, 46, 0.24);
+    --wave-3: rgba(140, 77, 46, 0.34);
+    --wave-4: rgba(110, 59, 34, 0.5);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg-1: #1f130d;
+      --bg-2: #2c1a11;
+      --ink: #f6e9de;
+      --ink-soft: #cdb3a1;
+      --brand: #d79a74;
+      --brand-dark: #b97d58;
+      --card: rgba(44, 28, 20, 0.8);
+      --card-border: rgba(215, 154, 116, 0.2);
+      --wave-1: rgba(215, 154, 116, 0.1);
+      --wave-2: rgba(215, 154, 116, 0.16);
+      --wave-3: rgba(215, 154, 116, 0.24);
+      --wave-4: rgba(185, 125, 88, 0.36);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body { height: 100%; margin: 0; }
+
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: #643620;
+    background-attachment: fixed;
+    min-height: 100%;
+    overflow-x: hidden;
+    padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Ondas ---------- */
+  .waves {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 55vh;
+    min-height: 260px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .wave-layer {
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 200%;
+    height: 100%;
+    display: flex;
+    will-change: transform;
+  }
+  .wave-layer svg {
+    flex: 0 0 50%;
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .wave-layer.l1 { animation: drift 28s linear infinite; }
+  .wave-layer.l2 { animation: drift 20s linear infinite reverse; }
+  .wave-layer.l3 { animation: drift 14s linear infinite; }
+  .wave-layer.l4 { animation: drift 9s linear infinite reverse; }
+  .wave-layer.l1 svg path { fill: var(--wave-1); }
+  .wave-layer.l2 svg path { fill: var(--wave-2); }
+  .wave-layer.l3 svg path { fill: var(--wave-3); }
+  .wave-layer.l4 svg path { fill: var(--wave-4); }
+
+  /* leve "respiração" vertical para dar profundidade */
+  .wave-layer.l1 { bottom: 4%;  }
+  .wave-layer.l2 { bottom: 2%;  }
+  .wave-layer.l3 { bottom: 0;   }
+  .wave-layer.l4 { bottom: -4%; }
+
+  @keyframes drift {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+
+  /* ---------- Conteúdo ---------- */
+  main {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 5vw, 40px);
+  }
+
+  .card {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    padding: clamp(28px, 7vw, 44px) clamp(22px, 6vw, 40px);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    animation: rise .8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .brand {
+    margin: 0 0 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.05rem, 3.6vw, 1.2rem);
+    color: var(--brand);
+    letter-spacing: .01em;
+  }
+  .brand em { font-style: italic; }
+  .crp {
+    margin: 0 0 clamp(20px, 5vw, 28px);
+    font-size: .75rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* contador circular */
+  .timer {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto clamp(18px, 5vw, 26px);
+  }
+  .timer svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .timer .track { fill: none; stroke: var(--card-border); stroke-width: 6; }
+  .timer .bar {
+    fill: none;
+    stroke: var(--wa);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+  }
+  .timer .count {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.45rem, 5.4vw, 1.9rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  h1 em { color: var(--brand); font-style: italic; }
+
+  .lead {
+    margin: 0 auto clamp(22px, 5vw, 28px);
+    max-width: 36ch;
+    font-size: clamp(.95rem, 3.5vw, 1.02rem);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+    padding: 15px 22px;
+    border-radius: 999px;
+    background: var(--wa);
+    color: #fff;
+    font-size: 1.02rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -10px rgba(37, 211, 102, .8);
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover { background: var(--wa-dark); transform: translateY(-2px); }
+  .btn:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+  .btn svg { width: 22px; height: 22px; fill: currentColor; flex: none; }
+
+  .cancel {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 10px;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: .88rem;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .cancel:hover { color: var(--brand); }
+  .cancel:focus-visible { outline: 2px solid var(--brand); border-radius: 6px; }
+
+  .note {
+    margin: 18px 0 0;
+    font-size: .78rem;
+    color: var(--ink-soft);
+  }
+  .note a { color: var(--brand); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 360px) {
+    .timer { width: 108px; height: 108px; }
+    .timer .count { font-size: 2.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave-layer { animation-duration: 90s; }
+    .card { animation: none; }
+    .timer .bar { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Ondas de fundo -->
+<div class="waves" aria-hidden="true">
+  <div class="wave-layer l1">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,160 C120,100 240,100 360,160 C480,220 600,220 720,160 C840,100 960,100 1080,160 C1200,220 1320,220 1440,160 L1440,320 L0,320 Z"/></svg>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,160 C120,100 240,100 360,160 C480,220 600,220 720,160 C840,100 960,100 1080,160 C1200,220 1320,220 1440,160 L1440,320 L0,320 Z"/></svg>
+  </div>
+  <div class="wave-layer l2">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,190 C180,130 300,130 480,190 C660,250 780,250 960,190 C1140,130 1260,130 1440,190 L1440,320 L0,320 Z"/></svg>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,190 C180,130 300,130 480,190 C660,250 780,250 960,190 C1140,130 1260,130 1440,190 L1440,320 L0,320 Z"/></svg>
+  </div>
+  <div class="wave-layer l3">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,220 C90,170 270,170 360,220 C450,270 630,270 720,220 C810,170 990,170 1080,220 C1170,270 1350,270 1440,220 L1440,320 L0,320 Z"/></svg>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,220 C90,170 270,170 360,220 C450,270 630,270 720,220 C810,170 990,170 1080,220 C1170,270 1350,270 1440,220 L1440,320 L0,320 Z"/></svg>
+  </div>
+  <div class="wave-layer l4">
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,250 C240,210 480,210 720,250 C960,290 1200,290 1440,250 L1440,320 L0,320 Z"/></svg>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none"><path d="M0,250 C240,210 480,210 720,250 C960,290 1200,290 1440,250 L1440,320 L0,320 Z"/></svg>
+  </div>
+</div>
+
+<main>
+  <section class="card" aria-live="polite">
+    <p class="brand">Ana Beatriz de Oliveira <em>Schmitz</em></p>
+    <p class="crp">CRP 12/30593 · Psicóloga Clínica</p>
+
+    <div class="timer" role="timer" aria-label="Contagem regressiva para redirecionamento">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="track" cx="60" cy="60" r="54"/>
+        <circle class="bar" id="bar" cx="60" cy="60" r="54"/>
+      </svg>
+      <div class="count" id="count">5</div>
+    </div>
+
+    <h1 id="titulo">Você será encaminhado ao <em>WhatsApp</em> em instantes</h1>
+    <p class="lead" id="texto">
+      Em poucos segundos abriremos a conversa para você agendar sua primeira sessão. Um passo de cada vez, no seu ritmo.
+    </p>
+
+    <a class="btn" id="btn" href="https://wa.me/5547984622810?text=Ol%C3%A1,%20gostaria%20de%20agendar%20uma%20sess%C3%A3o!" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.52.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.195 2.105 3.195 5.1 4.485.714.3 1.27.48 1.704.629.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345m-5.446 7.443h-.016c-1.77 0-3.524-.48-5.055-1.38l-.36-.214-3.75.975 1.005-3.645-.239-.375c-.99-1.576-1.516-3.391-1.516-5.26 0-5.445 4.455-9.885 9.942-9.885 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99-.004 5.444-4.46 9.885-9.935 9.885M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411"/></svg>
+      Ir agora para o WhatsApp
+    </a>
+    <br>
+    <button class="cancel" id="cancelar" type="button">Cancelar redirecionamento</button>
+
+    <p class="note">Atendimento presencial em Joinville/SC e online · Sigilo profissional garantido</p>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var TOTAL = 300;                       // segundos até o redirecionamento
+  var CIRC  = 2 * Math.PI * 54;        // circunferência do círculo (r = 54)
+  var btn   = document.getElementById('btn');
+  var url   = btn.getAttribute('href');
+  var count = document.getElementById('count');
+  var bar   = document.getElementById('bar');
+  var title = document.getElementById('titulo');
+  var text  = document.getElementById('texto');
+  var cancelBtn = document.getElementById('cancelar');
+
+  var restante = TOTAL;
+  var intervalo = null;
+  var cancelado = false;
+
+  bar.style.strokeDasharray = CIRC;
+  bar.style.strokeDashoffset = 0;
+
+  function atualizar() {
+    count.textContent = restante;
+    bar.style.strokeDashoffset = CIRC * (1 - restante / TOTAL);
+  }
+
+  function redirecionar() {
+    if (cancelado) return;
+    clearInterval(intervalo);
+    count.textContent = '✓';
+    bar.style.strokeDashoffset = CIRC;
+    title.innerHTML = 'Abrindo o <em>WhatsApp</em>…';
+    text.textContent = 'Se a conversa não abrir sozinha, toque no botão abaixo.';
+    window.location.href = url;
+  }
+
+  function tick() {
+    restante -= 1;
+    if (restante <= 0) {
+      restante = 0;
+      atualizar();
+      redirecionar();
+    } else {
+      atualizar();
+    }
+  }
+
+  cancelBtn.addEventListener('click', function () {
+    cancelado = true;
+    clearInterval(intervalo);
+    count.textContent = '•';
+    bar.style.strokeDashoffset = 0;
+    title.innerHTML = 'Redirecionamento <em>cancelado</em>';
+    text.textContent = 'Tudo bem! Quando quiser conversar, é só tocar no botão abaixo.';
+    cancelBtn.hidden = true;
+  });
+
+  // inicia a contagem
+  atualizar();
+  // pequeno atraso para a transição do primeiro frame ficar suave
+  requestAnimationFrame(function () {
+    intervalo = setInterval(tick, 1000);
+  });
+})();
+</script>
+</body>
+</html>
